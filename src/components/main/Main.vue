@@ -48,7 +48,7 @@ const coinBlack = computed(() => new URL('/src/assets/img/pawn-black.png', impor
 const activate = () => {
     isActivated.value = false;
     isFlipping.value = true;
-    isBlack.value = true;
+    isBlack.value = false;
 
     setTimeout(() => {
         const random = Math.random();
