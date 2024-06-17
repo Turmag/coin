@@ -1,7 +1,7 @@
 <template>
     <header :class="$style.header">
         <h1 :class="$style.title">
-            Монеточка
+            Копеечка
         </h1>
         <Switch />
     </header>
