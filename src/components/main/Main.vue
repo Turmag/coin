@@ -22,6 +22,8 @@ import Results from '@/components/main/Results.vue';
 import {
     ref, computed, useCssModule, 
 } from 'vue';
+import Modal from '@/components/Modal.vue';
+import { useModal } from 'vue-final-modal';
 
 const $style = useCssModule();
 
@@ -60,8 +62,19 @@ const activate = () => {
     setTimeout(() => {
         isFlipping.value = false;
         isBlack.value ? blackCount.value++ : whiteCount.value++;
+        open();
     }, 3000);
 };
+
+const { open, close } = useModal({
+    component: Modal,
+    attrs: {
+        getText: () => isBlack.value ? 'Ты играешь за чёрных!' : 'Ты играешь за белых!',
+        async onApply() {
+            close();
+        },
+    },
+});
 </script>
 
 <style lang="scss" module>

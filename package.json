@@ -11,17 +11,18 @@
         "bd": "yarn build && yarn deploy"
     },
     "dependencies": {
+        "floating-vue": "^5.2.2",
         "pinia": "^2.0.23",
         "sass": "^1.56.0",
         "vue": "^3.2.41",
-        "vue-router": "^4.1.6",
-        "floating-vue": "^5.2.2"
+        "vue-final-modal": "^4.5.4",
+        "vue-router": "^4.1.6"
     },
     "devDependencies": {
         "@rushstack/eslint-patch": "^1.7.2",
+        "@types/node": "^20.11.24",
         "@typescript-eslint/eslint-plugin": "^7.3.1",
         "@typescript-eslint/parser": "^7.3.1",
-        "@types/node": "^20.11.24",
         "@vitejs/plugin-vue": "^3.2.0",
         "@vue/eslint-config-typescript": "^13.0.0",
         "eslint": "^8.57.0",

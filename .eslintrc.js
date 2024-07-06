@@ -134,6 +134,7 @@ module.exports = {
             },
         ],
         '@typescript-eslint/member-delimiter-style': 'error',
+        '@typescript-eslint/no-unused-vars': 'error',
     },
     overrides: [
         {
