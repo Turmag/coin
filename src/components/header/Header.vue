@@ -1,7 +1,9 @@
 <template>
     <header :class="$style.header">
         <h1 :class="$style.title">
-            Монеточка
+            Монет<a href="https://focusinfo.ru/mpstats-coin/">
+                о
+            </a>чка
         </h1>
         <Switch />
     </header>
@@ -20,10 +22,15 @@ import Switch from '@/components/header/Switch.vue';
     }
 
     .title {
+        display: flex;
         margin-top: -3px;
         padding: 14px 0 0 16px;
         font-size: 28px;
         color: var(--color);
         font-weight: bold;
+        
+        a {
+            font-weight: 700;
+        }
     }
 </style>
