@@ -135,6 +135,8 @@ module.exports = {
         ],
         '@typescript-eslint/member-delimiter-style': 'error',
         '@typescript-eslint/no-unused-vars': 'error',
+        'vue/no-useless-v-bind': 'error',
+        'vue/prefer-true-attribute-shorthand': 'error',
     },
     overrides: [
         {
