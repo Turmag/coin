@@ -19,7 +19,7 @@ module.exports = {
         'plugin:vue/recommended',
         'plugin:jsonc/recommended-with-jsonc',
     ],
-    plugins: ['vue', '@typescript-eslint'],
+    plugins: ['vue', '@typescript-eslint', 'eslint-plugin-local-rules'],
     rules: {
         indent: 'off',
         '@typescript-eslint/indent': [
@@ -136,7 +136,7 @@ module.exports = {
         '@typescript-eslint/member-delimiter-style': 'error',
         '@typescript-eslint/no-unused-vars': 'error',
         'vue/no-useless-v-bind': 'error',
-        'vue/prefer-true-attribute-shorthand': 'error',
+        'local-rules/prefer-true-attribute-shorthand': ['error', 'always'],
     },
     overrides: [
         {

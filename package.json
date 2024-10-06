@@ -2,7 +2,6 @@
     "name": "coin",
     "private": true,
     "version": "2.0.0",
-    "type": "commonjs",
     "scripts": {
         "dev": "vite",
         "build": "vite build",
@@ -27,6 +26,7 @@
         "@vue/eslint-config-typescript": "^13.0.0",
         "eslint": "^8.57.0",
         "eslint-plugin-jsonc": "^2.14.1",
+        "eslint-plugin-local-rules": "^3.0.2",
         "eslint-plugin-vue": "^9.28.0",
         "postcss-html": "^1.6.0",
         "stylelint": "15.10.1",
