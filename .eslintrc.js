@@ -137,6 +137,8 @@ module.exports = {
         '@typescript-eslint/no-unused-vars': 'error',
         'vue/no-useless-v-bind': 'error',
         'local-rules/prefer-true-attribute-shorthand': ['error', 'always'],
+        'vue/no-unused-refs': 'error',
+        'vue/require-typed-ref': 'error',
     },
     overrides: [
         {

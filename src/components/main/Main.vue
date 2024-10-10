@@ -24,10 +24,11 @@ import {
 } from 'vue';
 import Modal from '@/components/Modal.vue';
 import { useModal } from 'vue-final-modal';
+import { useToggle } from '@vueuse/core';
 
 const $style = useCssModule();
 
-const isActivated = ref(false);
+const [isActivated, toggleActivated] = useToggle();
 const isFlipping = ref(false);
 const isBlack = ref(false);
 const whiteCount = ref(0);
@@ -47,8 +48,9 @@ const btnClass = computed(() => ({
 const coinWhite = computed(() => new URL('/src/assets/img/pawn-white.png', import.meta.url).href);
 const coinBlack = computed(() => new URL('/src/assets/img/pawn-black.png', import.meta.url).href);
 
-const activate = () => {
-    isActivated.value = false;
+const activate = arg => {
+    console.log('asd', arg);
+    toggleActivated(false);
     isFlipping.value = true;
     isBlack.value = false;
 
@@ -56,7 +58,7 @@ const activate = () => {
         const random = Math.random();
         isBlack.value = random < 0.5;
 
-        isActivated.value = true;
+        toggleActivated(true);
     });
 
     setTimeout(() => {
