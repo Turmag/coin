@@ -139,6 +139,8 @@ module.exports = {
         'local-rules/prefer-true-attribute-shorthand': ['error', 'always'],
         'vue/no-unused-refs': 'error',
         'vue/require-typed-ref': 'error',
+        'local-rules/add-dot-vue': 'error',
+        '@typescript-eslint/consistent-type-imports': 'error',
     },
     overrides: [
         {

@@ -9,7 +9,7 @@ module.exports = {
             schema: [{ enum: ['always', 'never'] }],
         },
         create(context) {
-            return context.parserServices.defineTemplateBodyVisitor({
+            return context.parserServices?.defineTemplateBodyVisitor({
                 VAttribute(node) {
                     const option = context.options[0] || 'always';
 
@@ -38,6 +38,31 @@ module.exports = {
                     }
                 },
             });
+        },
+    },
+    'add-dot-vue': {
+        meta: {
+            fixable: 'code',
+            docs: {
+                description: 'My awesome ESLint local rule that will replace an import declaration with something else',
+                category: 'Possible Errors',
+                recommended: false,
+            },
+            schema: [],
+        },
+        create(context) {
+            return {
+                ImportDeclaration(node) {
+                    console.log('node.source', node.source);
+                    if(node.source.value.includes('bad-import-declaration')) {
+                        context.report({
+                            node,
+                            message: 'Use proper import',
+                            fix: fixer => fixer.replaceText(node, node.specifiers.map(specifier =>`import ${specifier.local.name} from 'good-import-declaration';`).join('\n')),
+                        });
+                    }
+                },
+            };
         },
     },
 };

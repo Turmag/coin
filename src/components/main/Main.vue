@@ -48,8 +48,7 @@ const btnClass = computed(() => ({
 const coinWhite = computed(() => new URL('/src/assets/img/pawn-white.png', import.meta.url).href);
 const coinBlack = computed(() => new URL('/src/assets/img/pawn-black.png', import.meta.url).href);
 
-const activate = arg => {
-    console.log('asd', arg);
+const activate = () => {
     toggleActivated(false);
     isFlipping.value = true;
     isBlack.value = false;
