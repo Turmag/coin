@@ -27,9 +27,9 @@ module.exports = {
 
                     if (option !== 'always') return;
 
-                    if(node.directive && node.key.name !== 'bind' && node.value.expression.value) {
+                    if (node.directive && node.key.name !== 'bind' && node.value?.expression.value && node.value.expression.value === Boolean(node.value.expression.value)) {
                         const { argument } = node.key;
-                        if(!argument) return;
+                        if (!argument) return;
 
                         context.report({
                             node,
@@ -70,16 +70,16 @@ module.exports = {
                     const existingExts = ['.vue'];
                     const findRealExtension = (filePath, extsIndex = 0) => {
                         let realExt = fs.existsSync(filePath) ? path.extname(filePath) : null;
-                        if(realExt === null) realExt = fs.existsSync(`${filePath}${existingExts[extsIndex]}`) ? path.extname(`${filePath}${existingExts[extsIndex]}`) : null;
+                        if (realExt === null) realExt = fs.existsSync(`${filePath}${existingExts[extsIndex]}`) ? path.extname(`${filePath}${existingExts[extsIndex]}`) : null;
 
-                        if(realExt !== null || extsIndex >= existingExts.length) return realExt;
+                        if (realExt !== null || extsIndex >= existingExts.length) return realExt;
                         return findRealExtension(filePath, extsIndex + 1);
                     };
 
                     const nodeNameExt = path.extname(nodeName);
                     const realExt = findRealExtension(filePath);
 
-                    if(realExt === '.vue' && realExt !== nodeNameExt) {
+                    if (realExt === '.vue' && realExt !== nodeNameExt) {
                         context.report({
                             node,
                             message: 'Use proper import of vue files',

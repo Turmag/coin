@@ -90,6 +90,7 @@ module.exports = {
         'vue/no-multiple-template-root': 'off',
         'space-before-blocks': 'error',
         'no-multi-spaces': 'error',
+        'keyword-spacing': 'error',
         'key-spacing': ['error', { afterColon: true }],
         'arrow-parens': ['error', 'as-needed'],
         'vue/no-v-html': 'off',
