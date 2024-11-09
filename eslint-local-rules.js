@@ -145,7 +145,7 @@ module.exports = {
                                     node.specifiers.forEach(specifier => specifiersArr.push(specifier.local.name));
 
                                     const replaceSign = specifiersArr.length > 2 ? '\n' : ' ';
-                                    replaceText = `import { ${specifiersArr.join(`, ${replaceSign}`)} } from '${resultNodeName}';`;
+                                    replaceText = `import { ${specifiersArr.join(`,${replaceSign}`)} } from '${resultNodeName}';`;
                                 }
 
                                 return fixer.replaceText(node, replaceText);
