@@ -7,7 +7,13 @@ export default defineConfig(({ mode }: { mode: string }) => {
     return {
         plugins: [vue()],
         base: '/coin/',
-        resolve: { alias: { '@': path.resolve(__dirname, './src') } },
+        resolve: {
+            alias: {
+                '@': path.resolve(__dirname, './src'),
+                '@main': path.resolve(__dirname, './src/components/main'), 
+                '@header': path.resolve(__dirname, './src/components/header'), 
+            }, 
+        },
         css: {
             modules: { generateScopedName: mode === 'development' ? '' : '[hash:base64:8]' },
             preprocessorOptions: { scss: { api: 'modern-compiler' } },

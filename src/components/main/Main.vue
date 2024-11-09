@@ -21,7 +21,7 @@
 import {
     ref, computed, useCssModule, 
 } from 'vue';
-import Results from '@/components/main/Results.vue';
+import Results from '@main/Results.vue';
 import Modal from '@/components/Modal.vue';
 import { useModal } from 'vue-final-modal';
 import { useToggle } from '@vueuse/core';

@@ -2,6 +2,12 @@ const path = require('node:path');
 const fs = require('node:fs');
 const resolve = require('resolve');
 
+const aliases = {
+    '@main': path.resolve(__dirname, './src/components/main'), 
+    '@header': path.resolve(__dirname, './src/components/header'), 
+    '@': path.resolve(__dirname, './src'),
+};
+
 module.exports = {
     'prefer-true-attribute-shorthand': {
         meta: {
@@ -44,12 +50,11 @@ module.exports = {
             }) : {};
         },
     },
-    'add-dot-vue': {
+    'add-vue-extension': {
         meta: {
             fixable: 'code',
             docs: {
-                description: 'My awesome ESLint local rule that will replace an import declaration with something else',
-                category: 'Possible Errors',
+                description: 'require .vue in vue files',
                 recommended: false,
             },
             schema: [],
@@ -58,7 +63,11 @@ module.exports = {
             return {
                 ImportDeclaration(node) {
                     const basedir = path.dirname(path.resolve(context.getFilename()));
-                    const nodeName = node.source.value.replace('@', path.resolve(__dirname, './src'));
+                    let nodeName = node.source.value;
+
+                    Object.entries(aliases).forEach(([key, value]) => {
+                        if (nodeName.includes(key)) nodeName = nodeName.replace(key, value);
+                    });
 
                     let filePath;
                     try {
@@ -67,19 +76,18 @@ module.exports = {
                         filePath = path.resolve(basedir, nodeName);
                     }
 
-                    const existingExts = ['.vue'];
-                    const findRealExtension = (filePath, extsIndex = 0) => {
+                    const vueExt = '.vue';
+                    const findRealExtension = filePath => {
                         let realExt = fs.existsSync(filePath) ? path.extname(filePath) : null;
-                        if (realExt === null) realExt = fs.existsSync(`${filePath}${existingExts[extsIndex]}`) ? path.extname(`${filePath}${existingExts[extsIndex]}`) : null;
+                        if (realExt === null) realExt = fs.existsSync(`${filePath}${vueExt}`) ? path.extname(`${filePath}${vueExt}`) : null;
 
-                        if (realExt !== null || extsIndex >= existingExts.length) return realExt;
-                        return findRealExtension(filePath, extsIndex + 1);
+                        return realExt;
                     };
 
                     const nodeNameExt = path.extname(nodeName);
                     const realExt = findRealExtension(filePath);
 
-                    if (realExt === '.vue' && realExt !== nodeNameExt) {
+                    if (realExt === vueExt && realExt !== nodeNameExt) {
                         context.report({
                             node,
                             message: 'Use proper import of vue files',

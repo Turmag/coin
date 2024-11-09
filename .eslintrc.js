@@ -137,11 +137,11 @@ module.exports = {
         '@typescript-eslint/member-delimiter-style': 'error',
         '@typescript-eslint/no-unused-vars': 'error',
         'vue/no-useless-v-bind': 'error',
-        'local-rules/prefer-true-attribute-shorthand': ['error', 'always'],
         'vue/no-unused-refs': 'error',
         'vue/require-typed-ref': 'error',
-        'local-rules/add-dot-vue': 'error',
         '@typescript-eslint/consistent-type-imports': 'error',
+        'local-rules/prefer-true-attribute-shorthand': ['error', 'always'],
+        'local-rules/add-vue-extension': 'error',
     },
     overrides: [
         {

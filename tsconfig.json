@@ -3,8 +3,8 @@
         "baseUrl": ".",
         "paths": {
             "@/*": ["src/*"],
-            "@components/*": ["src/components/*"],
-            "@assets/*": ["src/assets/*"]
+            "@main/*": ["src/components/main/*"],
+            "@header/*": ["src/components/header/*"]
         },
         "lib": ["esnext", "dom"],
         "types": ["node", "vite/client"],
