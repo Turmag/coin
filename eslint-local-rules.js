@@ -95,7 +95,7 @@ module.exports = {
                         context.report({
                             node,
                             message: 'Use proper import of vue files',
-                            fix: fixer => fixer.replaceText(node, node.specifiers.map(specifier =>`import ${specifier.local.name} from '${node.source.value}${realExt}';`).join('\n')),
+                            fix: fixer => fixer.replaceText(node, node.specifiers.map(specifier => `import ${specifier.local.name} from '${node.source.value}${realExt}';`).join('\n')),
                         });
                     }
                 },
@@ -136,7 +136,20 @@ module.exports = {
                         context.report({
                             node,
                             message: 'Use shortest alias',
-                            fix: fixer => fixer.replaceText(node, node.specifiers.map(specifier =>`import ${specifier.local.name} from '${resultNodeName}';`).join('\n')),
+                            fix: fixer => {
+                                let replaceText = '';
+                                if (node.specifiers[0].type === 'ImportDefaultSpecifier') {
+                                    replaceText = `import ${node.specifiers[0].local.name} from '${resultNodeName}';`;
+                                } else {
+                                    const specifiersArr = [];
+                                    node.specifiers.forEach(specifier => specifiersArr.push(specifier.local.name));
+
+                                    const replaceSign = specifiersArr.length > 2 ? '\n' : ' ';
+                                    replaceText = `import { ${specifiersArr.join(`, ${replaceSign}`)} } from '${resultNodeName}';`;
+                                }
+
+                                return fixer.replaceText(node, replaceText);
+                            }, 
                         });
                     }
                 },
