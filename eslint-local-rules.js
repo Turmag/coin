@@ -2,11 +2,13 @@ const path = require('node:path');
 const fs = require('node:fs');
 const resolve = require('resolve');
 
-const aliases = {
+const aliasesObj = {
     '@main': path.resolve(__dirname, './src/components/main'), 
-    '@header': path.resolve(__dirname, './src/components/header'), 
-    '@': path.resolve(__dirname, './src'),
+    '@header': path.resolve(__dirname, './src/components/header'),
+    '@': path.resolve(__dirname, './src'), 
 };
+
+const aliases = Object.entries(aliasesObj);
 
 module.exports = {
     'prefer-true-attribute-shorthand': {
@@ -50,6 +52,7 @@ module.exports = {
             }) : {};
         },
     },
+
     'add-vue-extension': {
         meta: {
             fixable: 'code',
@@ -65,8 +68,9 @@ module.exports = {
                     const basedir = path.dirname(path.resolve(context.getFilename()));
                     let nodeName = node.source.value;
 
-                    Object.entries(aliases).forEach(([key, value]) => {
+                    aliases.every(([key, value]) => {
                         if (nodeName.includes(key)) nodeName = nodeName.replace(key, value);
+                        else return nodeName === node.source.value;
                     });
 
                     let filePath;
@@ -92,6 +96,47 @@ module.exports = {
                             node,
                             message: 'Use proper import of vue files',
                             fix: fixer => fixer.replaceText(node, node.specifiers.map(specifier =>`import ${specifier.local.name} from '${node.source.value}${realExt}';`).join('\n')),
+                        });
+                    }
+                },
+            };
+        },
+    },
+
+    'use-shortest-alias': {
+        meta: {
+            fixable: 'code',
+            docs: {
+                description: 'There are can be used shortest alias',
+                recommended: false,
+            },
+            schema: [],
+        },
+        create(context) {
+            return {
+                ImportDeclaration(node) {
+                    const nodeName = node.source.value;
+                    let nodeNameWithoutAlias = nodeName;
+                    let resultNodeName = nodeName;
+
+                    aliases.every(([key, value]) => {
+                        if (nodeNameWithoutAlias.includes(key)) nodeNameWithoutAlias = nodeNameWithoutAlias.replace(key, value);
+                        else return nodeNameWithoutAlias === nodeName;
+                    });
+
+                    nodeNameWithoutAlias = nodeNameWithoutAlias.replace(/\//ig, '\\');
+
+                    aliases.every(([key, value]) => {
+                        if (nodeNameWithoutAlias.includes(value)) {
+                            resultNodeName = nodeNameWithoutAlias.replace(value, key).replace(/\\/ig, '\/');
+                        } else return resultNodeName === nodeName;
+                    });
+
+                    if (nodeName !== resultNodeName) {
+                        context.report({
+                            node,
+                            message: 'Use shortest alias',
+                            fix: fixer => fixer.replaceText(node, node.specifiers.map(specifier =>`import ${specifier.local.name} from '${resultNodeName}';`).join('\n')),
                         });
                     }
                 },

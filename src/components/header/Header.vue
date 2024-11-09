@@ -10,7 +10,7 @@
 </template>
 
 <script setup lang="ts">
-import Switch from '@/components/header/Switch.vue';
+import Switch from '@header/Switch.vue';
 </script>
 
 <style lang="scss" module>

@@ -142,6 +142,7 @@ module.exports = {
         '@typescript-eslint/consistent-type-imports': 'error',
         'local-rules/prefer-true-attribute-shorthand': ['error', 'always'],
         'local-rules/add-vue-extension': 'error',
+        'local-rules/use-shortest-alias': 'error',
     },
     overrides: [
         {
