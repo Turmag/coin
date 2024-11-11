@@ -124,9 +124,10 @@ module.exports = {
                         else return nodeNameWithoutAlias === nodeName;
                     });
 
-                    nodeNameWithoutAlias = nodeNameWithoutAlias.replace(/\//ig, '\\');
+                    nodeNameWithoutAlias = nodeNameWithoutAlias.replace(/\\/ig, '\/');
 
                     aliases.every(([key, value]) => {
+                        value = value.replace(/\\/ig, '\/');
                         if (nodeNameWithoutAlias.includes(value)) {
                             resultNodeName = nodeNameWithoutAlias.replace(value, key).replace(/\\/ig, '\/');
                         } else return resultNodeName === nodeName;
@@ -145,7 +146,8 @@ module.exports = {
                                     node.specifiers.forEach(specifier => specifiersArr.push(specifier.local.name));
 
                                     const replaceSign = specifiersArr.length > 2 ? '\n' : ' ';
-                                    replaceText = `import { ${specifiersArr.join(`,${replaceSign}`)} } from '${resultNodeName}';`;
+                                    const replaceShiftSign = specifiersArr.length > 2 ? '\n    ' : ' ';
+                                    replaceText = `import {${replaceShiftSign}${specifiersArr.join(`,${replaceShiftSign}`)}${specifiersArr.length > 2 ? ',' : ''}${replaceSign}} from '${resultNodeName}';`;
                                 }
 
                                 return fixer.replaceText(node, replaceText);
