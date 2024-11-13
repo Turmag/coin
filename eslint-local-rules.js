@@ -158,4 +158,55 @@ module.exports = {
             };
         },
     },
+
+    'import-entities-by-column-or-line': {
+        meta: {
+            fixable: 'code',
+            docs: {
+                description: 'Prefered column or line import',
+                recommended: true,
+            },
+            schema: [{
+                type: 'object',
+                properties: { minProperties: { type: 'number' } }, 
+            }],
+        },
+        create(context) {
+            return {
+                ImportDeclaration(node) {
+                    if (node.specifiers[0].type === 'ImportDefaultSpecifier') return;
+                    const minProperties = context.options[0].minProperties;
+
+                    let areSmallAttributesInColumn = false;
+                    let areLinesRepeated = false;
+                    if (node.specifiers.length < minProperties) {
+                        if (node.specifiers[0].loc.start.line !== node.specifiers[0].parent.loc.start.line) areSmallAttributesInColumn = true;
+                    } else {
+                        node.specifiers.every((specifier, i) => {
+                            if (i === 0) return true;
+                            if (specifier.loc.start.line === specifier.loc.end.line && node.specifiers[i - 1].loc.start.line === specifier.loc.start.line) areLinesRepeated = true; 
+                            else return !areLinesRepeated;
+                        });
+                    }
+
+                    if (areLinesRepeated || areSmallAttributesInColumn) {
+                        context.report({
+                            node,
+                            message: areLinesRepeated ? 'Use column import' : 'Use line import',
+                            fix: fixer => {
+                                const specifiersArr = [];
+                                node.specifiers.forEach(specifier => specifiersArr.push(specifier.local.name));
+
+                                const replaceSign = areLinesRepeated ? '\n' : ' ';
+                                const replaceShiftSign = areLinesRepeated ? '\n    ' : ' ';
+                                const replaceText = `import {${replaceShiftSign}${specifiersArr.join(`,${replaceShiftSign}`)}${specifiersArr.length > 2 ? ',' : ''}${replaceSign}} from '${node.source.value}';`;
+
+                                return fixer.replaceText(node, replaceText);
+                            }, 
+                        });
+                    }
+                },
+            };
+        },
+    },
 };

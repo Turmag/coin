@@ -19,7 +19,9 @@
 
 <script setup lang="ts">
 import {
-    ref, computed, useCssModule, 
+    ref,
+    computed,
+    useCssModule,
 } from 'vue';
 import Results from '@main/Results.vue';
 import Modal from '@/components/Modal.vue';
