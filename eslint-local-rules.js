@@ -199,7 +199,7 @@ module.exports = {
 
                                 const replaceSign = areLinesRepeated ? '\n' : ' ';
                                 const replaceShiftSign = areLinesRepeated ? '\n    ' : ' ';
-                                const replaceText = `import {${replaceShiftSign}${specifiersArr.join(`,${replaceShiftSign}`)}${specifiersArr.length > 2 ? ',' : ''}${replaceSign}} from '${node.source.value}';`;
+                                const replaceText = `import {${replaceShiftSign}${specifiersArr.join(`,${replaceShiftSign}`)}${areLinesRepeated ? ',' : ''}${replaceSign}} from '${node.source.value}';`;
 
                                 return fixer.replaceText(node, replaceText);
                             }, 
