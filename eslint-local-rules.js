@@ -174,6 +174,7 @@ module.exports = {
         create(context) {
             return {
                 ImportDeclaration(node) {
+                    if (!node.specifiers[0]) return;
                     if (node.specifiers[0].type === 'ImportDefaultSpecifier') return;
                     const minProperties = context.options[0].minProperties;
 
