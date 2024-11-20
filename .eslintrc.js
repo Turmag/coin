@@ -144,6 +144,7 @@ module.exports = {
         'local-rules/add-vue-extension': 'error',
         'local-rules/use-shortest-alias': 'error',
         'local-rules/import-entities-by-column-or-line': ['error', { minProperties: 3 }],
+        'local-rules/import-right-order': 'warn',
     },
     overrides: [
         {
