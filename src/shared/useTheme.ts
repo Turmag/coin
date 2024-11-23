@@ -4,20 +4,21 @@ import {
     watchEffect,
     onMounted, 
 } from 'vue';
-import { mainStore } from '@/store';
+import { useStorage } from '@vueuse/core';
 
 export function useTheme() {
-    const store = mainStore();
+    const isDarkMode = useStorage('isDarkModeCoin', false);
+    const isSavedDarkMode = useStorage('isSavedDarkModeCoin', false);
     const matches = ref(true);
 
     const setDarkMode = () => {
         document.body.classList.add('dark');
-        store.isDarkMode = true;
+        isDarkMode.value = true;
     };
 
     const setLightMode = () => {
         document.body.classList.remove('dark');
-        store.isDarkMode = false;
+        isDarkMode.value = false;
     };
 
     watchEffect(onInvalidate => {
@@ -32,20 +33,15 @@ export function useTheme() {
 
     watch(
         () => matches.value,
-        val => {
-            if (!store.isSavedDarkMode) val ? setDarkMode() : setLightMode();
+        value => {
+            if (!isSavedDarkMode.value) value ? setDarkMode() : setLightMode();
         },
     );
 
     onMounted(() => {
-        let isDarkMode = String(localStorage.getItem('coinDarkMode'));
-
-        if (!['false', 'true'].includes(isDarkMode)) {
-            isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches.toString();
-        } else {
-            store.isSavedDarkMode = true;
+        if (!isSavedDarkMode.value) {
+            isDarkMode.value = window.matchMedia('(prefers-color-scheme: dark)').matches;
         }
-
-        if (isDarkMode === 'true') setDarkMode();
+        if (isDarkMode.value) setDarkMode();
     });
 }

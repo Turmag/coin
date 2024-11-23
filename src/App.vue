@@ -6,9 +6,9 @@
 
 <script setup lang="ts">
 import { ModalsContainer } from 'vue-final-modal';
-import Header from '@/components/header/Header.vue';
-import Main from '@/components/main/Main.vue';
-import { useTheme } from '@/shared/theme';
+import Header from '@header/Header.vue';
+import Main from '@main/Main.vue';
+import { useTheme } from '@/shared/useTheme';
 
 useTheme();
 </script>
