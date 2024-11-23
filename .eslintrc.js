@@ -14,15 +14,16 @@ module.exports = {
         extraFileExtensions: ['.vue', '.json'],
     },
     extends: [
-        'plugin:vue/vue3-recommended',
         'eslint:recommended',
-        'plugin:vue/recommended',
+        'plugin:@typescript-eslint/recommended-type-checked',
+        'plugin:@typescript-eslint/stylistic-type-checked',
+        'plugin:vue/vue3-recommended',
         'plugin:jsonc/recommended-with-jsonc',
     ],
-    plugins: ['vue', '@typescript-eslint', 'eslint-plugin-local-rules'],
+    plugins: ['@typescript-eslint', '@stylistic', 'eslint-plugin-local-rules'],
     rules: {
         indent: 'off',
-        '@typescript-eslint/indent': [
+        '@stylistic/indent': [
             'error',
             4,
             {
@@ -134,7 +135,7 @@ module.exports = {
                 allowedNames: ['self'],
             },
         ],
-        '@typescript-eslint/member-delimiter-style': 'error',
+        '@stylistic/member-delimiter-style': 'error',
         '@typescript-eslint/no-unused-vars': 'error',
         'vue/no-useless-v-bind': 'error',
         'vue/no-unused-refs': 'error',
@@ -152,10 +153,9 @@ module.exports = {
             rules: { indent: 'off' },
         },
         {
-            files: ['*.ts'],
+            files: ['*.js', '*.json', '*.json5', '*.jsonc'],
             extends: [
-                'plugin:@typescript-eslint/recommended-type-checked',
-                'plugin:@typescript-eslint/stylistic-type-checked',
+                'plugin:@typescript-eslint/disable-type-checked',
             ],
         },
         {

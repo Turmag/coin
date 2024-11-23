@@ -14,7 +14,7 @@
 </template>
 
 <script setup lang="ts">
-interface Props {
+interface IProps {
     width?: string | number;
     height?: string | number;
     viewBoxWidth?: string | number;
@@ -22,7 +22,7 @@ interface Props {
     color?: string;
 }
 
-withDefaults(defineProps<Props>(), {
+withDefaults(defineProps<IProps>(), {
     width: 18,
     height: 18,
     viewBoxWidth: 0,

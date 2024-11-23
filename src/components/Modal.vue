@@ -24,17 +24,13 @@
 import { VueFinalModal } from 'vue-final-modal';
 import { computed } from 'vue';
 
-interface Props {
+interface IProps {
     getText: () => string;
 }
+const props = defineProps<IProps>();
 
-const props = defineProps<Props>();
-
-interface Emits {
-    (e: 'apply'): void;
-}
-
-const emits = defineEmits<Emits>();
+type TEmits = (e: 'apply') => void;
+const emits = defineEmits<TEmits>();
 
 const text = computed(() => props.getText() ?? '');
 

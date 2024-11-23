@@ -13,12 +13,12 @@
 </template>
 
 <script setup lang="ts">
-interface Props {
+interface IProps {
     whiteCount: number;
     blackCount: number;
 }
 
-defineProps<Props>();
+defineProps<IProps>();
 </script>
 
 <style lang="scss" module>
