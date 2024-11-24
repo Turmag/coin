@@ -85,6 +85,7 @@ module.exports = {
         'comma-style': ['error', 'last'],
         'semi-style': ['error', 'last'],
         semi: [2, 'always'],
+        '@typescript-eslint/semi': ['error', 'always'],
         'comma-dangle': ['error', 'always-multiline'],
         'brace-style': ['error', '1tbs'],
         'eol-last': ['error', 'always'],
