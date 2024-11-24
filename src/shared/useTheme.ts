@@ -2,7 +2,7 @@ import {
     ref,
     watch,
     watchEffect,
-    onMounted, 
+    onMounted,
 } from 'vue';
 import { useStorage } from '@vueuse/core';
 

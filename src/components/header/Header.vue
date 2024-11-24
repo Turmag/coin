@@ -28,7 +28,7 @@ import Switch from '@header/Switch.vue';
         font-size: 28px;
         color: var(--color);
         font-weight: bold;
-        
+
         a {
             font-weight: 700;
         }

@@ -24,7 +24,7 @@ import {
     useCssModule,
 } from 'vue';
 import Results from '@main/Results.vue';
-import Modal from '@/components/Modal.vue'; 
+import Modal from '@/components/Modal.vue';
 import { useModal } from 'vue-final-modal';
 import { useToggle } from '@vueuse/core';
 
@@ -66,17 +66,16 @@ const activate = () => {
         isFlipping.value = false;
         isBlack.value ? blackCount.value++ : whiteCount.value++;
 
-        void (async () => await open())();
+        open();
     }, 3000);
 };
 
 const { open, close } = useModal({
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     component: Modal,
     attrs: {
         getText: () => isBlack.value ? 'Ты играешь за чёрных!' : 'Ты играешь за белых!',
         onApply() {
-            void (async () => await close())();
+            close();
         },
     },
 });
@@ -135,7 +134,7 @@ const { open, close } = useModal({
         transition: transform 1s;
         backface-visibility: hidden;
     }
-    
+
     .coinBack {
         transform: rotateY(-180deg);
     }
@@ -185,4 +184,3 @@ const { open, close } = useModal({
         }
     }
 </style>
-
