@@ -1,8 +1,7 @@
 import local from 'eslint-plugin-local';
-import tseslint from 'typescript-eslint';
 import config from 'turmag-eslint-config';
 
-export default tseslint.config(
+export default [
     { plugins: { local } },
 
     ...config,
@@ -16,4 +15,4 @@ export default tseslint.config(
             'local/import-right-order': 'off',
         },
     },
-);
+];
