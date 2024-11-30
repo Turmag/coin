@@ -1,16 +1,6 @@
 import local from 'eslint-plugin-local';
 import config from 'turmag-eslint-config';
-import path from 'path';
-import { fileURLToPath } from 'url';
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-const aliases = {
-    '@main': path.resolve(__dirname, './src/components/main'),
-    '@header': path.resolve(__dirname, './src/components/header'),
-    '@': path.resolve(__dirname, './src'),
-};
+import { aliases } from './aliases.mjs';
 
 export default [
     { plugins: { local } },
