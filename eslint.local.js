@@ -3,14 +3,6 @@ const path = require('node:path');
 const fs = require('node:fs');
 const resolve = require('resolve');
 
-const aliasesObj = {
-    '@main': path.resolve(__dirname, './src/components/main'),
-    '@header': path.resolve(__dirname, './src/components/header'),
-    '@': path.resolve(__dirname, './src'),
-};
-
-const aliases = Object.entries(aliasesObj);
-
 const entitiesOrder = ['external', 'vue', 'component', 'composable', 'store', 'mixin', 'type', 'constant', 'method', 'api'];
 const determineEntity = (value, specifiers) => {
     let entity = 'external';
@@ -83,11 +75,17 @@ module.exports = {
                     description: 'require .vue in vue files',
                     recommended: false,
                 },
-                schema: [],
+                schema: [{
+                    type: 'object',
+                    properties: { aliases: { type: 'object' } },
+                }],
             },
             create(context) {
                 return {
                     ImportDeclaration(node) {
+                        const aliases = Object.entries(context.options[0].aliases);
+                        if (!aliases.length) return;
+
                         const basedir = path.dirname(path.resolve(context.getFilename()));
                         let nodeName = node.source.value;
 
@@ -134,11 +132,17 @@ module.exports = {
                     description: 'There are can be used shortest alias',
                     recommended: false,
                 },
-                schema: [],
+                schema: [{
+                    type: 'object',
+                    properties: { aliases: { type: 'object' } },
+                }],
             },
             create(context) {
                 return {
                     ImportDeclaration(node) {
+                        const aliases = Object.entries(context.options[0].aliases);
+                        if (!aliases.length) return;
+
                         const nodeName = node.source.value;
                         let nodeNameWithoutAlias = nodeName;
                         let resultNodeName = nodeName;
