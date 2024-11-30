@@ -1148,6 +1148,13 @@ eslint-plugin-local@^6.0.0:
     "@thisismanta/pessimist" "^1.2.0"
     chalk "^4.0.0"
 
+eslint-plugin-turmag-special-rules@^0.0.1:
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-turmag-special-rules/-/eslint-plugin-turmag-special-rules-0.0.1.tgz#9c3addd62858559e9b94b447b468278350ca84fe"
+  integrity sha512-m6jZc5ayen/PqKRkoRgyILJ+iYug/1PRoDz5Y2Myu7vU8AH3AWyFMwdCjXqEGgjOcytQV2aG1dAxRA5oIUCQhA==
+  dependencies:
+    requireindex "^1.2.0"
+
 eslint-plugin-vue@^9.31.0:
   version "9.31.0"
   resolved "https://registry.yarnpkg.com/eslint-plugin-vue/-/eslint-plugin-vue-9.31.0.tgz#5da53c2826f8efd8a62835aad596826053b1085e"
@@ -2099,6 +2106,11 @@ require-from-string@^2.0.2:
   version "2.0.2"
   resolved "https://registry.yarnpkg.com/require-from-string/-/require-from-string-2.0.2.tgz#89a7fdd938261267318eafe14f9c32e598c36909"
   integrity sha512-Xf0nWe6RseziFMu+Ap9biiUbmplq6S9/p+7w7YXP/JBHhrUDDUhwa+vANyubuqfZWTveU//DYVGsDG7RKL/vEw==
+
+requireindex@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/requireindex/-/requireindex-1.2.0.tgz#3463cdb22ee151902635aa6c9535d4de9c2ef1ef"
+  integrity sha512-L9jEkOi3ASd9PYit2cwRfyppc9NoABujTP8/5gFcbERmo5jUoAKovIC3fsF17pkTnGsrByysqX+Kxd2OTNI1ww==
 
 resolve-from@^4.0.0:
   version "4.0.0"
