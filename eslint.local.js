@@ -4,9 +4,9 @@ const fs = require('node:fs');
 const resolve = require('resolve');
 
 const aliasesObj = {
-    '@main': path.resolve(__dirname, './src/components/main'), 
+    '@main': path.resolve(__dirname, './src/components/main'),
     '@header': path.resolve(__dirname, './src/components/header'),
-    '@': path.resolve(__dirname, './src'), 
+    '@': path.resolve(__dirname, './src'),
 };
 
 const aliases = Object.entries(aliasesObj);
@@ -19,7 +19,7 @@ const determineEntity = (value, specifiers) => {
     if (value === 'vue') entity = 'vue';
     else if (value.includes('mixin')) entity = 'mixin';
     else if (value.includes('.vue') || value.includes('kit')) entity = 'component';
-    else if (value.includes('composable') || (specifiers && specifiers[0]?.local.name.toLowerCase().includes('use'))) entity = 'composable';
+    else if (value.includes('composable') || specifiers && specifiers[0]?.local.name.toLowerCase().includes('use')) entity = 'composable';
     else if (value.includes('store')) entity = 'store';
     else if (value.includes('type')) entity = 'type';
     else if (value.includes('constant')) entity = 'constant';
