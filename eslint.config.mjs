@@ -6,7 +6,7 @@ import { aliases } from './aliases.mjs';
 export default [
     {
         plugins: {
-            specialRules,
+            'special-rules': specialRules,
             local,
         },
     },
@@ -15,11 +15,11 @@ export default [
 
     {
         rules: {
-            'specialRules/prefer-true-attribute-shorthand': 'error',
-            'local/add-vue-extension': ['error', { aliases }],
-            'local/use-shortest-alias': ['error', { aliases }],
-            'local/import-entities-by-column-or-line': ['error', { minProperties: 3 }],
-            'local/import-right-order': 'off',
+            'special-rules/prefer-true-attribute-shorthand': 'error',
+            'special-rules/add-vue-extension': ['error', { aliases }],
+            'special-rules/use-shortest-alias': ['error', { aliases }],
+            'special-rules/import-entities-by-column-or-line': ['error', { minProperties: 3 }],
+            'special-rules/import-right-order': 'off',
         },
     },
 ];
