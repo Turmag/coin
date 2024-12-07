@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-require-imports */
 const path = require('node:path');
 const fs = require('node:fs');
-const resolve = require('resolve');
 
 const entitiesOrder = ['external', 'vue', 'component', 'composable', 'store', 'mixin', 'type', 'constant', 'method', 'api'];
 const determineEntity = (value, specifiers) => {
@@ -94,13 +93,7 @@ module.exports = {
                             else return nodeName === node.source.value;
                         });
 
-                        let filePath;
-                        try {
-                            filePath = resolve.sync(nodeName, { basedir });
-                            // eslint-disable-next-line @typescript-eslint/no-unused-vars
-                        } catch (error) {
-                            filePath = path.resolve(basedir, nodeName);
-                        }
+                        const filePath = path.resolve(basedir, nodeName);
 
                         const vueExt = '.vue';
                         const findRealExtension = filePath => {
@@ -152,12 +145,12 @@ module.exports = {
                             else return nodeNameWithoutAlias === nodeName;
                         });
 
-                        nodeNameWithoutAlias = nodeNameWithoutAlias.replace(/\\/ig, '\/');
+                        nodeNameWithoutAlias = nodeNameWithoutAlias.replace(/\\/ig, '/');
 
                         aliases.every(([key, value]) => {
-                            value = value.replace(/\\/ig, '\/');
+                            value = value.replace(/\\/ig, '/');
                             if (nodeNameWithoutAlias.includes(value))
-                                resultNodeName = nodeNameWithoutAlias.replace(value, key).replace(/\\/ig, '\/');
+                                resultNodeName = nodeNameWithoutAlias.replace(value, key).replace(/\\/ig, '/');
                             else return resultNodeName === nodeName;
                         });
 

@@ -25,8 +25,8 @@ import Switch from '@header/Switch.vue';
         display: flex;
         margin-top: -3px;
         padding: 14px 0 0 16px;
-        font-size: 28px;
         color: var(--color);
+        font-size: 28px;
         font-weight: bold;
 
         a {

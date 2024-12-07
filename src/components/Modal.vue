@@ -40,14 +40,15 @@ const apply = () => emits('apply');
 <style lang="scss" module>
     .modal {
         display: flex;
-        align-items: center;
         justify-content: center;
+        align-items: center;
     }
 
     .content {
         position: relative;
         overflow: hidden;
         display: flex;
+        gap: 16px;
         width: 600px;
         min-height: 100px;
         max-height: 500px;
@@ -56,7 +57,6 @@ const apply = () => emits('apply');
         border: 1px solid var(--border-color);
         background-color: var(--background-color);
         flex-direction: column;
-        gap: 16px;
 
         @media screen and (width <= 600px) {
             width: 380px;
@@ -65,10 +65,10 @@ const apply = () => emits('apply');
 
     .title {
         width: 100%;
+        color: var(--color);
         text-align: center;
         font-size: 40px;
         line-height: normal;
-        color: var(--color);
 
         @media screen and (width <= 600px) {
             font-size: 32px;
@@ -77,10 +77,10 @@ const apply = () => emits('apply');
 
     .context {
         width: 100%;
+        color: var(--color);
         text-align: center;
         font-size: 32px;
         line-height: normal;
-        color: var(--color);
 
         @media screen and (width <= 600px) {
             font-size: 32px;
@@ -101,19 +101,19 @@ const apply = () => emits('apply');
     .btn {
         box-sizing: border-box;
         display: flex;
-        align-items: center;
         justify-content: center;
+        align-items: center;
         min-width: 200px;
         height: 64px;
         padding: 16px;
         border-radius: 15px;
         background-color: var(--btn-bg-color);
-        font-size: 24px;
-        line-height: normal;
         color: var(--color);
+        font-size: 24px;
+        font-weight: 400;
+        line-height: normal;
         transition: 0.3s ease;
         cursor: pointer;
-        font-weight: 400;
         user-select: none;
 
         &:hover {

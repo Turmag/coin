@@ -108,8 +108,8 @@ const resetStorageDarkMode = () => {
         width: 10px;
         height: 10px;
         border-radius: 50%;
-        outline: none;
         color: var(--color);
+        outline: none;
         cursor: pointer;
         user-select: none;
     }

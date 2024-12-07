@@ -124,8 +124,8 @@ const { open, close } = useModal({
         top: 0;
         left: 0;
         display: flex;
-        align-items: center;
         justify-content: center;
+        align-items: center;
         width: 120px;
         height: 120px;
         padding: 10px;
@@ -144,8 +144,8 @@ const { open, close } = useModal({
         border-radius: 5px;
         border: 1px solid;
         background-color: var(--btn-bg-color);
-        font-size: 20px;
         color: var(--color);
+        font-size: 20px;
         transition: .3s ease;
         cursor: pointer;
         user-select: none;
