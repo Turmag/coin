@@ -9,7 +9,8 @@
         "deploy": "scp -r dist/* u2250830@37.140.192.227:./www/focusinfo.ru/coin",
         "bd": "yarn build && yarn deploy",
         "eslint-timing": "export TIMING=1 || set TIMING=1&& eslint components --cache --cache-strategy metadata",
-        "eslint-fix": "eslint src/** --fix"
+        "eslint-fix": "eslint src/** --fix",
+        "eslint-print": "eslint --print-config .eslint.local.js > eslint-config-result.json"
     },
     "dependencies": {
         "floating-vue": "^5.2.2",
