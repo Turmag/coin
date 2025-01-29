@@ -29,7 +29,7 @@ interface IProps {
 }
 const props = defineProps<IProps>();
 
-type TEmits = (e: 'apply') => void;
+type TEmits = (event: 'apply') => void;
 const emits = defineEmits<TEmits>();
 
 const text = computed(() => props.getText() ?? '');

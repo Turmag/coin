@@ -1,6 +1,6 @@
+import { aliases } from './aliases.mjs';
 import local from 'eslint-plugin-local';
 import config from 'turmag-eslint-config';
-import { aliases } from './aliases.mjs';
 
 export default [
     { plugins: { local } },

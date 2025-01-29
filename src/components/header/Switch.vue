@@ -28,9 +28,9 @@
 </template>
 
 <script setup lang="ts">
-import IconBase from '@/components/IconBase.vue';
-import Reset from '@/assets/icons/Reset.vue';
 import { useStorage } from '@vueuse/core';
+import Reset from '@/assets/icons/Reset.vue';
+import IconBase from '@/components/IconBase.vue';
 
 const isDarkMode = useStorage('isDarkModeCoin', false);
 const isSavedDarkMode = useStorage('isSavedDarkModeCoin', false);

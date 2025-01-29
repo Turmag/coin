@@ -14,8 +14,8 @@
 
 <script setup lang="ts">
 interface IProps {
-    whiteCount: number;
     blackCount: number;
+    whiteCount: number;
 }
 
 defineProps<IProps>();

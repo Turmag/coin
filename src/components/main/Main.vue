@@ -9,7 +9,7 @@
                     <img :src="coinBlack">
                 </div>
             </div>
-            <button :class="btnClass" @click="activate">
+            <button :class="buttonClass" @click="activate">
                 Подбросить монетку
             </button>
         </div>
@@ -18,15 +18,15 @@
 </template>
 
 <script setup lang="ts">
+import { useToggle } from '@vueuse/core';
+import { useModal } from 'vue-final-modal';
 import {
-    ref,
     computed,
+    ref,
     useCssModule,
 } from 'vue';
-import Results from '@main/Results.vue';
 import Modal from '@/components/Modal.vue';
-import { useModal } from 'vue-final-modal';
-import { useToggle } from '@vueuse/core';
+import Results from '@main/Results.vue';
 
 const $style = useCssModule();
 
@@ -42,7 +42,7 @@ const coinWrapperClass = computed(() => ({
     [$style.coinWrapperActivatedTails]: isBlack.value,
 }));
 
-const btnClass = computed(() => ({
+const buttonClass = computed(() => ({
     [$style.btn]: true,
     [$style.btnDisabled]: isFlipping.value,
 }));
@@ -70,14 +70,14 @@ const activate = () => {
     }, 3000);
 };
 
-const { open, close } = useModal({
-    component: Modal,
+const { close, open } = useModal({
     attrs: {
         getText: () => isBlack.value ? 'Ты играешь за чёрных!' : 'Ты играешь за белых!',
         onApply() {
             close();
         },
     },
+    component: Modal,
 });
 </script>
 

@@ -1,10 +1,10 @@
+import { useStorage } from '@vueuse/core';
 import {
+    onMounted,
     ref,
     watch,
     watchEffect,
-    onMounted,
 } from 'vue';
-import { useStorage } from '@vueuse/core';
 
 export function useTheme() {
     const isDarkMode = useStorage('isDarkModeCoin', false);

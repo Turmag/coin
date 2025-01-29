@@ -2,9 +2,9 @@ import { createRouter, createWebHistory } from 'vue-router';
 
 const routes = [
     {
-        path: '/coin/',
-        name: 'Home',
         component: () => import('@/App.vue'),
+        name: 'Home',
+        path: '/coin/',
     },
 ];
 

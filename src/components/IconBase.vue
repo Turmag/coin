@@ -15,18 +15,18 @@
 
 <script setup lang="ts">
 interface IProps {
-    width?: string | number;
-    height?: string | number;
-    viewBoxWidth?: string | number;
-    viewBoxHeight?: string | number;
     color?: string;
+    height?: string | number;
+    viewBoxHeight?: string | number;
+    viewBoxWidth?: string | number;
+    width?: string | number;
 }
 
 withDefaults(defineProps<IProps>(), {
-    width: 18,
-    height: 18,
-    viewBoxWidth: 0,
-    viewBoxHeight: 0,
     color: 'currentColor',
+    height: 18,
+    viewBoxHeight: 0,
+    viewBoxWidth: 0,
+    width: 18,
 });
 </script>
