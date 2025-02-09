@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-require-imports */
-const path = require('node:path');
 const fs = require('node:fs');
+const path = require('node:path');
 
 const entitiesOrder = ['external', 'vue', 'component', 'composable', 'store', 'mixin', 'type', 'constant', 'method', 'api'];
 const determineEntity = (value, specifiers) => {
@@ -35,34 +35,34 @@ module.exports = {
                 const sourceCode = context.getSourceCode();
                 return sourceCode.parserServices?.defineTemplateBodyVisitor
                     ? sourceCode.parserServices.defineTemplateBodyVisitor({
-                        VAttribute(node) {
-                            const option = context.options[0] || 'always';
+                            VAttribute(node) {
+                                const option = context.options[0] || 'always';
 
-                            if (option === 'never' && !node.directive && !node.value) {
-                                context.report({
-                                    node,
-                                    message: 'Boolean prop with \'true\' value should be written in longhand form',
-                                    fix: fixer => fixer.replaceText(node, `:${node.key.rawName}="true"`),
-                                });
-                            }
+                                if (option === 'never' && !node.directive && !node.value) {
+                                    context.report({
+                                        node,
+                                        message: 'Boolean prop with \'true\' value should be written in longhand form',
+                                        fix: fixer => fixer.replaceText(node, `:${node.key.rawName}="true"`),
+                                    });
+                                }
 
-                            if (option !== 'always') return;
+                                if (option !== 'always') return;
 
-                            if (node.directive && node.key.name !== 'bind' && node.value?.expression?.value && node.value.expression.value === Boolean(node.value.expression.value)) {
-                                const { argument } = node.key;
-                                if (!argument) return;
+                                if (node.directive && node.key.name !== 'bind' && node.value?.expression?.value && node.value.expression.value === Boolean(node.value.expression.value)) {
+                                    const { argument } = node.key;
+                                    if (!argument) return;
 
-                                context.report({
-                                    node,
-                                    message: 'Boolean prop with \'true\' value should be written in shorthand form',
-                                    fix: fixer => {
-                                        const sourceCode = context.getSourceCode();
-                                        return fixer.replaceText(node, sourceCode.getText(argument));
-                                    },
-                                });
-                            }
-                        },
-                    })
+                                    context.report({
+                                        node,
+                                        message: 'Boolean prop with \'true\' value should be written in shorthand form',
+                                        fix: fixer => {
+                                            const sourceCode = context.getSourceCode();
+                                            return fixer.replaceText(node, sourceCode.getText(argument));
+                                        },
+                                    });
+                                }
+                            },
+                        })
                     : {};
             },
         },
@@ -183,9 +183,11 @@ module.exports = {
         'import-entities-by-column-or-line': {
             meta: {
                 fixable: 'code',
-                docs: {
-                    description: 'Prefered column or line import',
-                    recommended: true,
+                type: 'suggestion',
+                docs: { description: 'Prefered column or line import' },
+                messages: {
+                    column: 'Use column import',
+                    line: 'Use line import',
                 },
                 schema: [{
                     type: 'object',
@@ -211,19 +213,38 @@ module.exports = {
                             });
                         }
 
-                        if (areLinesRepeated || areSmallAttributesInColumn) {
+                        if (areLinesRepeated) {
                             context.report({
                                 node,
-                                message: areLinesRepeated ? 'Use column import' : 'Use line import',
+                                messageId: 'column',
                                 fix: fixer => {
                                     const specifiersArr = [];
-                                    node.specifiers.forEach(specifier => specifiersArr.push(specifier.local.name));
+                                    node.specifiers.forEach(specifier => {
+                                        const localName = specifier.local.name;
 
-                                    const replaceSign = areLinesRepeated ? '\n' : ' ';
-                                    const replaceShiftSign = areLinesRepeated ? '\n    ' : ' ';
-                                    const replaceText = `import {${replaceShiftSign}${specifiersArr.join(`,${replaceShiftSign}`)}${areLinesRepeated ? ',' : ''}${replaceSign}} from '${node.source.value}';`;
+                                        const name = specifier.importKind === 'type' ? `type ${localName}` : localName;
+                                        specifiersArr.push(name);
+                                    });
 
-                                    return fixer.replaceText(node, replaceText);
+                                    const replaceShiftSign = '\n    ';
+                                    return fixer.replaceText(node, `import {${replaceShiftSign}${specifiersArr.join(`,${replaceShiftSign}`)},\n} from '${node.source.value}';`);
+                                },
+                            });
+                        } else if (areSmallAttributesInColumn) {
+                            context.report({
+                                node,
+                                messageId: 'line',
+                                fix: fixer => {
+                                    const specifiersArr = [];
+                                    node.specifiers.forEach(specifier => {
+                                        const localName = specifier.local.name;
+
+                                        const name = specifier.importKind === 'type' ? `type ${localName}` : localName;
+                                        specifiersArr.push(name);
+                                    });
+
+                                    const replaceShiftSign = ' ';
+                                    return fixer.replaceText(node, `import {${replaceShiftSign}${specifiersArr.join(`,${replaceShiftSign}`)} } from '${node.source.value}';`);
                                 },
                             });
                         }
