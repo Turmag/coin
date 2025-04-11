@@ -1,16 +1,16 @@
-import { createApp } from 'vue';
 import '@/style.scss';
-import { router } from '@/router';
-import { createPinia } from 'pinia';
-const pinia = createPinia();
-import FloatingVue from 'floating-vue';
 import 'floating-vue/dist/style.css';
 import 'vue-final-modal/style.css';
+import { router } from '@/router';
+import { createPinia } from 'pinia';
 import { createVfm } from 'vue-final-modal';
-const vfm = createVfm();
+import { createApp } from 'vue';
 import App from '@/App.vue';
+import FloatingVue from 'floating-vue';
 
-// eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+const vfm = createVfm();
+const pinia = createPinia();
+
 const app = createApp(App);
 app.use(router);
 app.use(pinia);
